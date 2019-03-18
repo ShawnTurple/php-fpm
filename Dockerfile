@@ -2,7 +2,7 @@ FROM php:7.1-fpm
 
 RUN set -ex; \
     apt-get update; \
-    apt-get install -y --no-install-recommends libjpeg-dev libpng-dev ssmtp libpq-dev libmemcached-dev libzip-dev; \
+    apt-get install -y --no-install-recommends libjpeg-dev libpng-dev ssmtp libpq-dev libmemcached-dev libzip-dev vim;\
     docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
     docker-php-ext-install gd mysqli opcache zip;
 
@@ -24,4 +24,7 @@ RUN touch /usr/local/etc/php/conf.d/uploads.ini \
     && echo "post_max_size = 1000M;" >> /usr/local/etc/php/conf.d/uploads.ini
 
 ADD xdebug.ini /usr/local/etc/php/conf.d
+ADD mail.ini /usr/local/etc/php/conf.d
 ADD ./www.conf /usr/local/etc/php
+
+RUN sed -i 's/error_reporting\ =\ E_ALL/error_reporting\ = \ E_ALL\ \&\ \~E_NOTICE/g' /usr/local/etc/php/php.ini
