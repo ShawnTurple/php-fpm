@@ -4,7 +4,7 @@ RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends libjpeg-dev libpng-dev ssmtp libpq-dev libmemcached-dev libzip-dev vim;\
     docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-    docker-php-ext-install gd mysqli opcache zip pdo;
+    docker-php-ext-install gd mysqli opcache zip pdo pdo_mysql;
 
 RUN pecl install pecl install xdebug && docker-php-ext-enable xdebug
 RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && echo 'include=/usr/local/etc/php/www.conf' >> /usr/local/etc/php/php.ini
