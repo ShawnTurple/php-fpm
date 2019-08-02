@@ -28,3 +28,4 @@ ADD mail.ini /usr/local/etc/php/conf.d
 ADD ./www.conf /usr/local/etc/php
 
 RUN sed -i 's/error_reporting\ =\ E_ALL/error_reporting\ = \ E_ALL\ \&\ \~E_NOTICE/g' /usr/local/etc/php/php.ini
+RUN sed -i 's/mailhub=mail/mailhub=mailcatcher:25/g' /etc/ssmtp/ssmtp.conf
